@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 gem 'capybara'
 gem 'poltergeist'
+gem 'rainbow'
 gem 'rake'
 
 group :test do

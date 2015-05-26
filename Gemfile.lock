@@ -87,6 +87,7 @@ DEPENDENCIES
   capybara
   cucumber
   poltergeist
+  rainbow
   rake
   rspec
   rubocop

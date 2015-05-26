@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('../../hl_scraper.rb', __FILE__)
+
+Scraper.new.run
