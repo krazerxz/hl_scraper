@@ -1,6 +1,8 @@
 source "http://rubygems.org"
 
 gem 'capybara'
+gem 'logger-better'
+gem 'nokogiri'
 gem 'poltergeist'
 gem 'rainbow'
 gem 'rake'
