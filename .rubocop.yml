@@ -1,0 +1,18 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'scripts/post-reset'
+    - 'lib/**/*'
+    - 'Gemfile'
+
+Metrics/LineLength:
+  Max: 150
+  AllowURI: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/PredicateName:
+  NamePrefixBlacklist:
+    - get_
+    - set_
