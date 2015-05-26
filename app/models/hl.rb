@@ -6,21 +6,21 @@ class HL
   end
 
   def login
-    visit @config['hl_url']
-    fill_in 'username', with: @config['hl_username']
-    fill_in 'DoB',      with: @config['hl_dob']
-
-    @logger.info 'HL: Filled in user and DoB'
-    click_button 'submit'
-    fill_password_boxes
-    @logger.info 'HL: Filled in password'
-    click_button 'submit'
-
     begin
+      visit @config['hl_url']
+      fill_in 'username', with: @config['hl_username']
+      fill_in 'DoB',      with: @config['hl_dob']
+
+      @logger.info 'HL: Filled in user and DoB'
+      click_button 'submit'
+      fill_password_boxes
+      @logger.info 'HL: Filled in password'
+      click_button 'submit'
+
       click_link 'View'
     rescue
+      @logger.info 'HL: Logged in' if logged_in?
     end
-    @logger.info 'HL: Logged in'
   end
 
   private
@@ -29,6 +29,10 @@ class HL
     (1..3).each do |box_number|
       page.find(:xpath, "//*[@id='pChar#{box_number}']").select("#{password_char_at(box_number)}")
     end
+  end
+
+  def logged_in?
+    page.has_css?('#holdings-table')
   end
 
   def  password_char_at(index)

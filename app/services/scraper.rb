@@ -15,20 +15,16 @@ class Scraper
     HL.new(@logger)
 
     while true do
-      sleep 2
-      write_to_file
+      # need to refresh every 10 minutes
+      sleep 1
+      stock_table = find('#holdings-table').text
+      write_to_file(stock_table)
     end
-
-    # document = Nokogiri::HTML(page.body)
-    # page.body
 
 
   end
 
-  def write_to_file
-    data = find('#holdings-table').text
-    require 'byebug'
-    debugger
+  def write_to_file(data)
     @logger.info 'Scraper: Updating file'
     File.open('holdings', 'w') { |file| file.write(data) }
   end
