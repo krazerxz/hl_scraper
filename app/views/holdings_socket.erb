@@ -1,2 +1,29 @@
 <div id="debug"></div>
 <div id="msg"></div>
+<div class="chart"></div>
+
+<style>
+  .chart div {
+    font: 10px sans-serif;
+    background-color: steelblue;
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+}
+</style>
+
+<script>
+  var data = [65.71, 1049.40, 622.69, 558.36, 258.38, 924.08, 1171.17];
+
+  var x = d3.scale.linear()
+  .domain([0, d3.max(data)])
+  .range([0, 420]);
+
+  d3.select(".chart")
+  .selectAll("div")
+  .data(data)
+  .enter().append("div")
+  .style("width", function(d) { return x(d) + "px"; })
+  .text(function(d) { return d; });
+</script>
