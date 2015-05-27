@@ -4,7 +4,6 @@ GEM
     ast (2.0.0)
     astrolabe (1.3.0)
       parser (>= 2.2.0.pre.3, < 3.0)
-    builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
     capybara (2.4.4)
@@ -15,25 +14,12 @@ GEM
       xpath (~> 2.0)
     cliver (0.3.2)
     columnize (0.9.0)
-    cucumber (2.0.0)
-      builder (>= 2.1.2)
-      cucumber-core (~> 1.1.3)
-      diff-lcs (>= 1.1.3)
-      gherkin (~> 2.12)
-      multi_json (>= 1.7.5, < 2.0)
-      multi_test (>= 0.1.2)
-    cucumber-core (1.1.3)
-      gherkin (~> 2.12.0)
-    diff-lcs (1.2.5)
     docile (1.1.5)
-    gherkin (2.12.2)
-      multi_json (~> 1.3)
     json (1.8.2)
     logger-better (0.2.1)
     mime-types (2.6.1)
     mini_portile (0.6.2)
     multi_json (1.11.0)
-    multi_test (0.1.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     parser (2.2.2.5)
@@ -49,19 +35,6 @@ GEM
       rack (>= 1.0)
     rainbow (2.0.0)
     rake (10.4.2)
-    rspec (3.2.0)
-      rspec-core (~> 3.2.0)
-      rspec-expectations (~> 3.2.0)
-      rspec-mocks (~> 3.2.0)
-    rspec-core (3.2.3)
-      rspec-support (~> 3.2.0)
-    rspec-expectations (3.2.1)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.2.0)
-    rspec-mocks (3.2.1)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.2.0)
-    rspec-support (3.2.2)
     rubocop (0.31.0)
       astrolabe (~> 1.3)
       parser (>= 2.2.2.1, < 3.0)
@@ -86,12 +59,10 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara
-  cucumber
   logger-better
   nokogiri
   poltergeist
   rainbow
   rake
-  rspec
   rubocop
   simplecov

@@ -3,7 +3,7 @@ if ENV['RACK_ENV'] != 'production'
 
   CLEAN.include "log/**"
 
-  task :default => [:clean, :rubocop, :spec, :'coverage:check_specs', :'cucumber:ok', :'cucumber:wip', :ok]
+  task :default => [:clean, :rubocop, :ok]
 
   task :ok do
     puts 'BUILD ' + Rainbow('S').red + Rainbow('U').green + Rainbow('C').yellow + Rainbow('C').blue + Rainbow('E').red + Rainbow('S').green + Rainbow('S').yellow + Rainbow('F').blue + Rainbow('U').red + Rainbow('L').green
