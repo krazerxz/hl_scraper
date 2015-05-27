@@ -37,7 +37,7 @@ class HL
 
   def stock_data
     return nil unless logged_in?
-    @holdings_parser.parse(page.body).to_json
+    @holdings_parser.parse(page.body)
   end
 
   private

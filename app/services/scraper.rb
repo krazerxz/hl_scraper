@@ -18,8 +18,6 @@ class Scraper
 
     EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8080) do |ws|
       ws.onopen    { ws.send "Hello Client!"}
-      require 'byebug'
-      debugger
       ws.onmessage { |msg| ws.send hl.stock_data }
     end
 
