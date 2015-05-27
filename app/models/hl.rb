@@ -4,6 +4,7 @@ class HL
   def initialize(logger)
     @config = YAML.load(File.open("#{File.dirname(__FILE__)}/../../config/config.yml"))
     @logger = logger
+    @holdings_parser = HoldingsParser.new
     login
     #refresh_thread # Not working
   end
@@ -36,7 +37,7 @@ class HL
 
   def stock_data
     return nil unless logged_in?
-    page.find('#holdings-table').text
+    @holdings_parser.parse(page.body).to_json
   end
 
   private
