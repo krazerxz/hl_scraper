@@ -55,7 +55,7 @@ class Stock
   end
 
   def self.prices row
-    row[items_before_price(row)+1..-1]
+    row[items_before_price(row)+1..-1].map{ |price| price.gsub(/,/, '').to_f }
   end
 
   def self.ticker row
