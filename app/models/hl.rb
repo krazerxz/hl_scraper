@@ -1,8 +1,11 @@
 class HL
+  REFRESH_TIME = 600 # 10 minutes
+
   def initialize(logger)
     @config = YAML.load(File.open("#{File.dirname(__FILE__)}/../../config/config.yml"))
     @logger = logger
     login
+    #refresh_thread # Not working
   end
 
   def login
@@ -23,6 +26,19 @@ class HL
     end
   end
 
+  def refresh_holdings_page
+    begin
+      visit page.driver.browser.current_url
+    rescue
+      @logger.info 'HL: Refreshed holdings page' if logged_in?
+    end
+  end
+
+  def stock_data
+    return nil unless logged_in?
+    page.find('#holdings-table').text
+  end
+
   private
 
   def fill_password_boxes
@@ -40,4 +56,14 @@ class HL
     password_index = character_string.scan(/(\d+)/).map { |i| i.first.to_i - 1 }
     @config['hl_password'][password_index[index - 1]]
   end
+
+  def refresh_thread
+    Thread.new do
+      while true do
+        sleep REFRESH_TIME
+        refresh_holdings_page
+      end
+    end
+  end
+
 end
