@@ -7,21 +7,23 @@
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
     <script>
+      var data = [];
       $(document).ready(function(){
         function debug(str){ $("#debug").append("<p>"+str+"</p>"); };
 
         ws = new WebSocket("ws://localhost:8080/api/holdings");
         ws.onmessage = function(evt) {
-          var data = JSON.parse(evt.data);
+          data = JSON.parse(evt.data);
           var chart_data = [];
           var total_value = 0;
 
           $.each(data.stocks, function(i, stock){
-            chart_data.push(stock.prices[2]);
-            total_value += parseFloat(stock.prices[2]);
+            chart_data.push(stock.prices[3]);
+            total_value += parseFloat(stock.prices[3]);
+            console.log( parseFloat(stock.prices[3]));
           });
 
-          $("total-value").html(total_value);
+          $("#total-value").html(total_value);
           draw_chart(chart_data);
 
         };
