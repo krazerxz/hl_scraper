@@ -1,6 +1,7 @@
 include Capybara::DSL
 Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist
+#Capybara.default_max_wait_time = 1
 
 class Scraper
   def initialize
@@ -18,17 +19,10 @@ class Scraper
 
     EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8080) do |ws|
       ws.onopen    { ws.send "Hello Client!"}
+      sleep 1
       ws.onmessage { |msg| ws.send hl.stock_data }
     end
-
     #while true do
-    #sleep 1
-    #write_to_file(hl.stock_data)
     #end
-  end
-
-  def write_to_file(data)
-    @logger.info 'Scraper: Updating file'
-    File.open('log/holdings', 'w') { |file| file.write(data) }
   end
 end

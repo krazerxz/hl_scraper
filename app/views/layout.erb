@@ -11,7 +11,20 @@
         function debug(str){ $("#debug").append("<p>"+str+"</p>"); };
 
         ws = new WebSocket("ws://localhost:8080/api/holdings");
-        ws.onmessage = function(evt) { $("#msg").append("<p>"+evt.data+"</p>"); };
+        ws.onmessage = function(evt) {
+          var data = JSON.parse(evt.data);
+          var chart_data = [];
+          var total_value = 0;
+
+          $.each(data.stocks, function(i, stock){
+            chart_data.push(stock.prices[2]);
+            total_value += parseFloat(stock.prices[2]);
+          });
+
+          $("total-value").html(total_value);
+          draw_chart(chart_data);
+
+        };
         ws.onclose = function() { debug("socket closed"); };
         ws.onopen = function() {
           debug("connected...");

@@ -1,5 +1,6 @@
 <div id="debug"></div>
 <div id="msg"></div>
+<h1 id="total-value"></h1>
 <div class="chart"></div>
 
 <style>
@@ -14,16 +15,16 @@
 </style>
 
 <script>
-  var data = [65.71, 1049.40, 622.69, 558.36, 258.38, 924.08, 1171.17];
+  function draw_chart(chart_data){
+    var x = d3.scale.linear()
+    .domain([0, d3.max(chart_data)])
+    .range([0, 420]);
 
-  var x = d3.scale.linear()
-  .domain([0, d3.max(data)])
-  .range([0, 420]);
-
-  d3.select(".chart")
-  .selectAll("div")
-  .data(data)
-  .enter().append("div")
-  .style("width", function(d) { return x(d) + "px"; })
-  .text(function(d) { return d; });
+    d3.select(".chart")
+    .selectAll("div")
+    .data(chart_data)
+    .enter().append("div")
+    .style("width", function(d) { return x(d) + "px"; })
+    .text(function(d) { return d; });
+  }
 </script>
