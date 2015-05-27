@@ -15,15 +15,13 @@
         ws.onmessage = function(evt) {
           data = JSON.parse(evt.data);
           var chart_data = [];
-          var total_value = 0;
 
           $.each(data.stocks, function(i, stock){
-            chart_data.push(stock.prices[3]);
-            total_value += parseFloat(stock.prices[3]);
-            console.log( parseFloat(stock.prices[3]));
+            chart_data.push(stock.prices.value);
+            console.log( parseFloat(stock.prices.value));
           });
 
-          $("#total-value").html(total_value);
+          $("#total-value").html('Total: £' + data.totals.value + ' / ' + '£' + data.totals.cost);
           draw_chart(chart_data);
 
         };

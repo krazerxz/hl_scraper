@@ -6,7 +6,6 @@ class HoldingsParser
   def parse raw_holdings
     holdings_table = HoldingsTable.new(raw_holdings)
     holdings_table.as_json
-
   end
 end
 
@@ -25,7 +24,12 @@ class HoldingsTable
   end
 
   def totals
-    { totals: @holdings_table[2].text.split[1..-1] }
+    totals =  @holdings_table[2].text.split[1..-1]
+    { value:    totals[0],
+      cost:     totals[1],
+      change_s: totals[2],
+      change_p: totals[3]
+    }
   end
 
   private
@@ -55,7 +59,14 @@ class Stock
   end
 
   def self.prices row
-    row[items_before_price(row)+1..-1].map{ |price| price.gsub(/,/, '').to_f }
+    prices = row[items_before_price(row)+1..-1].map{ |price| price.gsub(/,/, '').to_f }
+    { shares:   prices[0].to_i,
+      price:    prices[1],
+      value:    prices[2],
+      cost:     prices[3],
+      change_s: prices[4],
+      change_p: prices[5]
+    }
   end
 
   def self.ticker row
