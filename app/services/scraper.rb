@@ -14,10 +14,16 @@ class Scraper
 
     hl = HL.new(@logger)
 
-    while true do
-      sleep 1
-      write_to_file(hl.stock_data)
+    puts 'im here'
+    EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8080) do |ws|
+      ws.onopen    { ws.send "Hello Client!"}
+      ws.onmessage { |msg| ws.send hl.stock_data }
     end
+
+    #while true do
+    #sleep 1
+    #write_to_file(hl.stock_data)
+    #end
   end
 
   def write_to_file(data)
