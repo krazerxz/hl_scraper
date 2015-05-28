@@ -1,9 +1,10 @@
 var old_total_s = 0;
 
 function parse_data(raw_data){
-  var data = {bar_chart_data:[], bar_chart_negatives_data: [], pie_chart_data: [], raw: raw_data};
+  var data = {price_chart_data: [], value_chart_data: [], bar_chart_negatives_data: [], pie_chart_data: [], raw: raw_data};
   $.each(raw_data.stocks, function(i, stock){
-    data.bar_chart_data.push(stock.prices.price);
+    data.price_chart_data.push(stock.prices.price);
+    data.value_chart_data.push(stock.prices.value);
     data.pie_chart_data.push({ label: stock.ticker, count: stock.prices.value });
     data.bar_chart_negatives_data.push({name: stock.ticker, value: stock.prices.change_p});
   });
@@ -26,7 +27,8 @@ function update_total(totals){
 
 function update_ui(data){
   update_total(data.raw.totals);
-  draw_bar_chart(data.bar_chart_data);
+  draw_price_chart(data.price_chart_data);
+  draw_value_chart(data.value_chart_data);
   draw_pie_chart(data.pie_chart_data);
   draw_bar_chart_negatives(data.bar_chart_negatives_data);
 }

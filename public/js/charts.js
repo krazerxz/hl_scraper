@@ -51,13 +51,27 @@ function draw_bar_chart_negatives(chart_data){
   }
 }
 
-function draw_bar_chart(chart_data){
-  $('.bar-chart').empty();
+function draw_value_chart(chart_data){
+  $('.value-chart').empty();
   var x = d3.scale.linear()
   .domain([0, d3.max(chart_data)])
   .range([0, 420]);
 
-  d3.select(".bar-chart")
+  d3.select(".value-chart")
+  .selectAll("div")
+  .data(chart_data)
+  .enter().append("div")
+  .style("width", function(d) { return x(d) + "px"; })
+  .text(function(d) { return d; });
+}
+
+function draw_price_chart(chart_data){
+  $('.price-chart').empty();
+  var x = d3.scale.linear()
+  .domain([0, d3.max(chart_data)])
+  .range([0, 420]);
+
+  d3.select(".price-chart")
   .selectAll("div")
   .data(chart_data)
   .enter().append("div")
