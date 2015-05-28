@@ -6,7 +6,6 @@ class HL
     @logger = logger
     @holdings_parser = HoldingsParser.new
     login
-    #refresh_thread # Not working
   end
 
   def login
