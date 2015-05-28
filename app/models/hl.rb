@@ -5,7 +5,12 @@ class HL
     @config = YAML.load(File.open("#{File.dirname(__FILE__)}/../../config/config.yml"))
     @logger = logger
     @holdings_parser = HoldingsParser.new
+    @refreshing = false
     login
+  end
+
+  def is_refreshing?
+    @refreshing
   end
 
   def login
@@ -27,11 +32,14 @@ class HL
   end
 
   def refresh_holdings_page
+    @refreshing = true
+    @logger.info 'HL: Refreshing holdings page'
     begin
       visit page.driver.browser.current_url
     rescue
       @logger.info 'HL: Refreshed holdings page' if logged_in?
     end
+    @refreshing = false
   end
 
   def stock_data
