@@ -3,10 +3,11 @@ var old_total_s = 0;
 function parse_data(raw_data){
   var data = {price_chart_data: [], value_chart_data: [], bar_chart_negatives_data: [], pie_chart_data: [], raw: raw_data};
   $.each(raw_data.stocks, function(i, stock){
-    data.price_chart_data.push(stock.prices.price);
-    data.value_chart_data.push(stock.prices.value);
-    data.pie_chart_data.push({ label: stock.ticker, count: stock.prices.value });
-    data.bar_chart_negatives_data.push({name: stock.ticker, value: stock.prices.change_p});
+    data.price_chart_data.push( { label: stock.ticker, value:stock.prices.price  } );
+    data.value_chart_data.push( { label: stock.ticker, value: stock.prices.value } );
+
+    data.pie_chart_data.push( { label: stock.ticker, count: stock.prices.value } );
+    data.bar_chart_negatives_data.push( { name: stock.ticker, value: stock.prices.change_p } );
   });
   return data;
 }
