@@ -17,6 +17,7 @@
 
 <script>
   function draw_bar_chart(chart_data){
+    $('.bar-chart').empty();
     var x = d3.scale.linear()
     .domain([0, d3.max(chart_data)])
     .range([0, 420]);

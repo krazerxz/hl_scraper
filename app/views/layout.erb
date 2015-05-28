@@ -8,6 +8,8 @@
 
     <script>
       var data = [];
+      var old_value = 0;
+
       $(document).ready(function(){
         function debug(str){ $("#debug").append("<p>"+str+"</p>"); };
 
@@ -21,6 +23,19 @@
             chart_data.push(stock.prices.value);
             pie_chart_data.push({ label: stock.ticker, count: stock.prices.value });
           });
+
+          if (data.totals.value > old_value) {
+            $("#total-value").css("color","blue")
+          }
+          if (data.totals.value < old_value) {
+            $("#total-value").css("color","red")
+          }
+
+          setTimeout(function(){
+              $("#total-value").css("color", "black");
+          }, 500);
+
+          old_value = data.totals.value
 
           $("#total-value").html('Total: £' + data.totals.value + ' / ' + '£' + data.totals.cost);
 
