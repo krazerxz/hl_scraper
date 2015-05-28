@@ -25,7 +25,14 @@ class Scraper
 
       ws.onopen do
         puts "#{Time.now.strftime('%H:%M:%S')} : Client connected", '-'*80
-        EventMachine.add_periodic_timer(1) { ws.send @hl.stock_data }
+        EventMachine.add_periodic_timer(1) do
+          begin
+            ws.send @hl.stock_data
+          rescue
+            puts "#{Time.now.strftime('%H:%M:%S')} : Failed to send data", '-'*80
+          end
+        end
+        #ws.send @hl.stock_data
       end
       ws.onclose do
         puts "#{Time.now.strftime('%H:%M:%S')} : Client disconnected", '-'*80
