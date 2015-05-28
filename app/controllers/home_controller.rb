@@ -1,6 +1,6 @@
 class HLScraper < Sinatra::Base
 
   get '/' do
-    erb :'holdings_socket'
+    erb :'dashboard'
   end
 end
