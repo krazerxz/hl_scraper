@@ -13,16 +13,26 @@ class Scraper
       log.level = Kernel.const_get('Logger::INFO')
     end
 
-    hl = HL.new(@logger)
+    @hl = HL.new(@logger)
 
     puts 'im here'
 
+    define_websocket
+  end
+
+  def define_websocket
     EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8080) do |ws|
-      ws.onopen    { ws.send "Hello Client!"}
-      sleep 1
-      ws.onmessage { |msg| ws.send hl.stock_data }
+
+      ws.onopen do
+        puts "#{Time.now.strftime('%H:%M:%S')} : Client connected", '-'*80
+        EventMachine.add_periodic_timer(1) { ws.send @hl.stock_data }
+      end
+      ws.onclose do
+        puts "#{Time.now.strftime('%H:%M:%S')} : Client disconnected", '-'*80
+      end
+
+      ws.onmessage do |msg|
+      end
     end
-    #while true do
-    #end
   end
 end
