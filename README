@@ -1,1 +1,9 @@
-## HL Scraper
+## HL Scraper ##
+
+### Running ###
+1. set your account details in config.yml
+2. start the backend:
+> bundle exec ./scripts/fetch_data
+3. start the app:
+> rackup
+4. go to: localhost:9292
