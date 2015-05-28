@@ -1,3 +1,4 @@
+/*bar chart*/
 .bar-chart div {
   font: 10px sans-serif;
   background-color: steelblue;
@@ -6,6 +7,28 @@
   margin: 1px;
   color: white;
 }
+
+/*bar chart negatives*/
+.bar.positive {
+  fill: steelblue;
+}
+
+.bar.negative {
+  fill: brown;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/*pie chart*/
 .pie-chart {
   height: 360px;
   position: relative;
