@@ -42,8 +42,8 @@ function draw_bar_chart_negatives(chart_data){
   $('#neg-chart').remove()
 
   var margin = {top: 30, right: 10, bottom: 10, left: 10},
-    width = 400 - margin.left - margin.right,
-    height = 200 - margin.top - margin.bottom;
+    width = 500 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
 
   var x = d3.scale.linear()
   .range([0, width]);
@@ -55,7 +55,8 @@ function draw_bar_chart_negatives(chart_data){
   .scale(x)
   .orient("top");
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select(".bar-chart-negatives")
+  .append("svg")
   .attr("id", 'neg-chart')
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
@@ -72,7 +73,10 @@ function draw_bar_chart_negatives(chart_data){
     .attr("x", function(d) { return x(Math.min(0, d.value)); })
     .attr("y", function(d) { return y(d.name); })
     .attr("width", function(d) { return Math.abs(x(d.value) - x(0)); })
-    .attr("height", y.rangeBand());
+    .attr("height", y.rangeBand())
+    .style("fill", function(d, i) {
+      return color(d.name);
+    });
 
     svg.append("g")
     .attr("class", "x axis")
