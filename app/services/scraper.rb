@@ -20,9 +20,9 @@ class Scraper
   end
 
   def define_websocket
-    EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8080) do |ws|
-      @logger.info 'SC: Listening for connections'
+    @logger.info 'SC: Listening for connections'
 
+    EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8080) do |ws|
       ws.onopen do
         @logger.info 'SC: Client connected'
         EventMachine.add_periodic_timer(1) do
