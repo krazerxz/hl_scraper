@@ -42,8 +42,8 @@ function draw_bar_chart_negatives(chart_data){
   $('#neg-chart').remove()
 
   var margin = {top: 30, right: 10, bottom: 10, left: 10},
-    width = 500 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+    width = 450 - margin.left - margin.right,
+    height = 250 - margin.top - margin.bottom;
 
   var x = d3.scale.linear()
   .range([0, width]);
@@ -63,31 +63,31 @@ function draw_bar_chart_negatives(chart_data){
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    x.domain(d3.extent(chart_data, function(d) { return d.value; })).nice();
-    y.domain(chart_data.map(function(d) { return d.name; }));
+  x.domain(d3.extent(chart_data, function(d) { return d.value; })).nice();
+  y.domain(chart_data.map(function(d) { return d.name; }));
 
-    svg.selectAll(".bar-chart-negatives")
-    .data(chart_data)
-    .enter().append("rect")
-    .attr("class", function(d) { return d.value < 0 ? "bar negative" : "bar positive"; })
-    .attr("x", function(d) { return x(Math.min(0, d.value)); })
-    .attr("y", function(d) { return y(d.name); })
-    .attr("width", function(d) { return Math.abs(x(d.value) - x(0)); })
-    .attr("height", y.rangeBand())
-    .style("fill", function(d, i) {
-      return color(d.name);
-    });
+  svg.selectAll(".bar-chart-negatives")
+  .data(chart_data)
+  .enter().append("rect")
+  .attr("class", function(d) { return d.value < 0 ? "bar negative" : "bar positive"; })
+  .attr("x", function(d) { return x(Math.min(0, d.value)); })
+  .attr("y", function(d) { return y(d.name); })
+  .attr("width", function(d) { return Math.abs(x(d.value) - x(0)); })
+  .attr("height", y.rangeBand())
+  .style("fill", function(d, i) {
+    return color(d.name);
+  });
 
-    svg.append("g")
-    .attr("class", "x axis")
-    .call(xAxis);
+  svg.append("g")
+  .attr("class", "x axis")
+  .call(xAxis);
 
-    svg.append("g")
-    .attr("class", "y axis")
-    .append("line")
-    .attr("x1", x(0))
-    .attr("x2", x(0))
-    .attr("y2", height);
+  svg.append("g")
+  .attr("class", "y axis")
+  .append("line")
+  .attr("x1", x(0))
+  .attr("x2", x(0))
+  .attr("y2", height);
 
   function type(d) {
     d.value = +d.value;
@@ -101,8 +101,8 @@ function draw_pie_chart(chart_data){
   (function(d3) {
     'use strict';
 
-    var width = 360;
-    var height = 360;
+    var width = 400;
+    var height = 400;
     var radius = Math.min(width, height) / 2;
     var donutWidth = 75;
     var legendRectSize = 18;
@@ -162,6 +162,13 @@ function draw_pie_chart(chart_data){
     path.on('mouseout', function() {
       tooltip.style('display', 'none');
     });
+
+    d3.select('.legend-sidebar').html('');
+    var svg = d3.select('.legend-sidebar').append('svg')
+    .attr('height', height)
+    .append('g')
+    .attr('transform', 'translate(' + (40) +
+          ',' + (height / 4) + ')');
 
     var legend = svg.selectAll('.legend')
     .data(color.domain())
