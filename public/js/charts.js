@@ -1,5 +1,43 @@
 var color = d3.scale.category20();
 
+function draw_price_chart(chart_data){
+  $('.price-chart').empty();
+  var x = d3.scale.linear()
+  .domain([0, d3.max(chart_data.map(function(item){
+    return item.value;
+  }))])
+  .range([0, 420]);
+
+  d3.select(".price-chart")
+  .selectAll("div")
+  .data(chart_data)
+  .enter().append("div")
+  .style("width", function(d) { return x(d.value) + "px"; })
+  .style("background-color", function(d, i) {
+    return color(d.label);
+  })
+  .text(function(d) { return d.value; });
+}
+
+function draw_value_chart(chart_data){
+  $('.value-chart').empty();
+  var x = d3.scale.linear()
+  .domain([0, d3.max(chart_data.map(function(item){
+    return item.value;
+  }))])
+  .range([0, 420]);
+
+  d3.select(".value-chart")
+  .selectAll("div")
+  .data(chart_data)
+  .enter().append("div")
+  .style("width", function(d) { return x(d.value) + "px"; })
+  .style("background-color", function(d, i) {
+    return color(d.label);
+  })
+  .text(function(d) { return d.value; });
+}
+
 function draw_bar_chart_negatives(chart_data){
   $('#neg-chart').remove()
 
@@ -51,45 +89,6 @@ function draw_bar_chart_negatives(chart_data){
     d.value = +d.value;
     return d;
   }
-}
-
-function draw_value_chart(chart_data){
-  $('.value-chart').empty();
-  var x = d3.scale.linear()
-  .domain([0, d3.max(chart_data.map(function(item){
-    return item.value;
-  }))])
-  .range([0, 420]);
-
-  d3.select(".value-chart")
-  .selectAll("div")
-  .data(chart_data)
-  .enter().append("div")
-  .style("width", function(d) { return x(d.value) + "px"; })
-  .style("background-color", function(d, i) {
-    return color(d.label);
-  })
-  .text(function(d) { return d.value; });
-}
-
-function draw_price_chart(chart_data){
-  $('.price-chart').empty();
-  var x = d3.scale.linear()
-  .domain([0, d3.max(chart_data.map(function(item){
-    return item.value;
-  }))])
-  .range([0, 420]);
-
-  d3.select(".price-chart")
-  .selectAll("div")
-  .data(chart_data)
-  .enter().append("div")
-  .style("width", function(d) { return x(d.value) + "px"; })
-  .style("background-color", function(d, i) {
-    return color(d.label);
-  })
-  .text(function(d) { return d.value; });
-
 }
 
 function draw_pie_chart(chart_data){
