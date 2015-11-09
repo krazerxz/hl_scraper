@@ -1,2 +1,0 @@
-rvm use --install --create ruby-2.2.1@hl_scraper
-bundle -v > /dev/null || gem install bundler
