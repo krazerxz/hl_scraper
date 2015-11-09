@@ -14,21 +14,19 @@ class HL
   end
 
   def login
-    begin
-      visit @config['hl_url']
-      fill_in 'username', with: @config['hl_username']
-      fill_in 'DoB',      with: @config['hl_dob']
+    visit @config['hl_url']
+    fill_in 'username', with: @config['hl_username']
+    fill_in 'DoB',      with: @config['hl_dob']
 
-      @logger.info 'HL: Filled in user and DoB'
-      click_button 'submit'
-      fill_password_boxes
-      @logger.info 'HL: Filled in password'
-      click_button 'submit'
+    @logger.info 'HL: Filled in user and DoB'
+    click_button 'submit'
+    fill_password_boxes
+    @logger.info 'HL: Filled in password'
+    click_button 'submit'
 
-      click_link 'View'
-    rescue
-      @logger.info 'HL: Logged in' if logged_in?
-    end
+    click_link 'View'
+  rescue
+    @logger.info 'HL: Logged in' if logged_in?
   end
 
   def refresh_holdings_page
@@ -67,11 +65,10 @@ class HL
 
   def refresh_thread
     Thread.new do
-      while true do
+      loop do
         sleep REFRESH_TIME
         refresh_holdings_page
       end
     end
   end
-
 end

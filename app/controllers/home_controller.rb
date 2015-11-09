@@ -1,6 +1,5 @@
 class HLScraper < Sinatra::Base
-
   get '/' do
-    erb :'dashboard'
+    erb :dashboard
   end
 end
